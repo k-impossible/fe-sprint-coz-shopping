@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap');
 
     * {
         box-sizing: border-box;
@@ -21,4 +21,14 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
     }
 `;
-export default GlobalStyle;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  row-gap: 40px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+`
+export {GlobalStyle, Row}; 

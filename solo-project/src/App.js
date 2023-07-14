@@ -5,7 +5,7 @@ import Main from "./pages/Main";
 import BookMarkList from "./pages/BookMarkList";
 import ProductList from "./pages/ProductList";
 import Footer from "./components/Footer";
-import GlobalStyle from "./GlobalStyle";
+import {GlobalStyle} from "./GlobalStyle";
 import styled from "styled-components";
 
 const Wrap = styled.div`

@@ -1,18 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  column-gap: 20px;
-  row-gap: 40px;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  .item-container {
+const Container = styled.div`
     width: 22%;
-  }
+
   .item-img-container {
     position: relative;
     border-radius: 10x;
@@ -42,35 +33,50 @@ const Row = styled.div`
     font-weight: bold;
     padding-bottom: 5px;
   }
+  
 `;
 
-export default function Item() {
-  return (
-    <Row>
-      <div className="item-container">
-        <div className="item-img-container">
-          <img className="item-img" src="/images/sample.png" alt="itemImg" />
-          <img
-            className="item-bookmark-img"
-            src="/images/bookmark-off.png"
-            alt="bookmarkOff"
-          />
-        </div>
-        <div className="item-text-container">
-          <div className="item-title-box">
-            <p className="item-title1">상품이름</p>
-            <p className="item-title2">기획전 설명</p>
-          </div>
-          <div className="item-desc-box">
-            <p className="item-desc1">10%</p>
-            <p className="item-desc2">12900원</p>
-          </div>
-        </div>
-      </div>
+export default function Item({itemProps}) {
 
-      <div className="item-container">
+  function switchTitle(prop){
+    switch(prop.type){
+      case "Brand" :
+        return prop.brand_name
+      case "Category":
+        return "#"+prop.title
+      default:
+        return prop.title
+    }
+  }
+
+  function switchDesc(prop){
+    switch(prop.type){
+      case "Product" :
+        return (
+          <div className="item-desc-box">
+            <p className="item-desc1" style={{color:"#452CDD"}}>{prop.discountPercentage}%</p>
+            <p className="item-desc2">{prop.price}원</p>
+          </div>
+        )
+        
+      case "Brand":
+        return (
+          <div className="item-desc-box">
+            <p className="item-desc1">관심고객수</p>
+            <p className="item-desc2">{prop.follower}</p>
+          </div>
+        )
+      default:
+        break;
+    }
+  }
+
+  console.log(itemProps);
+  return (
+    <Container>
         <div className="item-img-container">
-          <img className="item-img" src="/images/sample.png" alt="itemImg" />
+          <img className="item-img" 
+              src={itemProps.image_url ? itemProps.image_url : itemProps.brand_image_url} alt="itemImg" />
           <img
             className="item-bookmark-img"
             src="/images/bookmark-off.png"
@@ -79,55 +85,11 @@ export default function Item() {
         </div>
         <div className="item-text-container">
           <div className="item-title-box">
-            <p className="item-title1">상품이름</p>
-            <p className="item-title2">기획전 설명</p>
+            <p className="item-title1">{switchTitle(itemProps)}</p>
+            <p className="item-title2">{itemProps.sub_title ? itemProps.sub_title : ""}</p>
           </div>
-          <div className="item-desc-box">
-            <p className="item-desc1">10%</p>
-            <p className="item-desc2">12900원</p>
-          </div>
+          {switchDesc(itemProps)}
         </div>
-      </div>
-      <div className="item-container">
-        <div className="item-img-container">
-          <img className="item-img" src="/images/sample.png" alt="itemImg" />
-          <img
-            className="item-bookmark-img"
-            src="/images/bookmark-off.png"
-            alt="bookmarkOff"
-          />
-        </div>
-        <div className="item-text-container">
-          <div className="item-title-box">
-            <p className="item-title1">상품이름</p>
-            <p className="item-title2">기획전 설명</p>
-          </div>
-          <div className="item-desc-box">
-            <p className="item-desc1">10%</p>
-            <p className="item-desc2">12900원</p>
-          </div>
-        </div>
-      </div>
-      <div className="item-container">
-        <div className="item-img-container">
-          <img className="item-img" src="/images/sample.png" alt="itemImg" />
-          <img
-            className="item-bookmark-img"
-            src="/images/bookmark-off.png"
-            alt="bookmarkOff"
-          />
-        </div>
-        <div className="item-text-container">
-          <div className="item-title-box">
-            <p className="item-title1">상품이름</p>
-            <p className="item-title2">기획전 설명</p>
-          </div>
-          <div className="item-desc-box">
-            <p className="item-desc1">10%</p>
-            <p className="item-desc2">12900원</p>
-          </div>
-        </div>
-      </div>
-    </Row>
+    </Container>
   );
 }
