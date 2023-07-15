@@ -25,10 +25,10 @@ const GlobalStyle = createGlobalStyle`
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-  column-gap: 20px;
-  row-gap: 40px;
+  column-gap: 50px;
+  row-gap: 50px;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
 `
 export {GlobalStyle, Row}; 

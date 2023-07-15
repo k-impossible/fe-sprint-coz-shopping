@@ -11,7 +11,7 @@ const Container = styled.div`
   }
   .item-img {
     width: 100%;
-    height: 100%;
+    height: 220px;
     border-radius: 10px;
     border: 1px solid #0003;
   }
@@ -36,7 +36,7 @@ const Container = styled.div`
   
 `;
 
-export default function Item({itemProps}) {
+export default function Item({itemProps,toggleBookMark}) {
 
   function switchTitle(prop){
     switch(prop.type){
@@ -71,7 +71,7 @@ export default function Item({itemProps}) {
     }
   }
 
-  console.log(itemProps);
+
   return (
     <Container>
         <div className="item-img-container">
@@ -79,8 +79,10 @@ export default function Item({itemProps}) {
               src={itemProps.image_url ? itemProps.image_url : itemProps.brand_image_url} alt="itemImg" />
           <img
             className="item-bookmark-img"
-            src="/images/bookmark-off.png"
+            src={itemProps.bookmark ? 
+                "/images/bookmark-on.png" : "/images/bookmark-off.png"}
             alt="bookmarkOff"
+            onClick={()=>toggleBookMark(itemProps.id,itemProps.bookmark)}
           />
         </div>
         <div className="item-text-container">
