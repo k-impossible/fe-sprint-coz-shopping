@@ -36,7 +36,7 @@ const Container = styled.div`
   
 `;
 
-export default function Item({itemProps,toggleBookMark}) {
+export default function Item({itemProp,toggleBookMark}) {
 
   function switchTitle(prop){
     switch(prop.type){
@@ -76,21 +76,21 @@ export default function Item({itemProps,toggleBookMark}) {
     <Container>
         <div className="item-img-container">
           <img className="item-img" 
-              src={itemProps.image_url ? itemProps.image_url : itemProps.brand_image_url} alt="itemImg" />
+              src={itemProp.image_url ? itemProp.image_url : itemProp.brand_image_url} alt="itemImg" />
           <img
             className="item-bookmark-img"
-            src={itemProps.bookmark ? 
+            src={itemProp.bookmark ? 
                 "/images/bookmark-on.png" : "/images/bookmark-off.png"}
             alt="bookmarkOff"
-            onClick={()=>toggleBookMark(itemProps.id,itemProps.bookmark)}
+            onClick={()=>toggleBookMark(itemProp)}
           />
         </div>
         <div className="item-text-container">
           <div className="item-title-box">
-            <p className="item-title1">{switchTitle(itemProps)}</p>
-            <p className="item-title2">{itemProps.sub_title ? itemProps.sub_title : ""}</p>
+            <p className="item-title1">{switchTitle(itemProp)}</p>
+            <p className="item-title2">{itemProp.sub_title ? itemProp.sub_title : ""}</p>
           </div>
-          {switchDesc(itemProps)}
+          {switchDesc(itemProp)}
         </div>
     </Container>
   );

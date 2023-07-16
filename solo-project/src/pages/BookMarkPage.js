@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function BookMarkList(){
+export default function BookMarkPage(){
     return (
         <div>bookmark list</div>
     )

@@ -19,37 +19,55 @@ export default function Main() {
   useEffect(()=>{
     const result = getData(4)
     result.then((value)=>{
-      // console.log(value);
       setDataList(value)
       setBookmarkList(getLocalStorage())
     })
 
   },[])
 
-  function setBookmarkAndStorage(list=[], init=false){
+  function setBookmarkAndStorage(list=[]){
     if(list.length !== 0){
-      const onlyBookmarkList = list.filter((el)=>{
-        return el.bookmark
-      })
-      // console.log(onlyBookmarkList);
+      const onlyBookmarkList = list.filter(el => el.bookmark)
       setBookmarkList(onlyBookmarkList)
-      if(!init) setLocalStorage(onlyBookmarkList)
+      setLocalStorage(onlyBookmarkList)
     }
   }
 
+  function toggleBookMark(item){
+      const changeDataList = dataList.map((el)=>{
+        if(el.id === item.id){
+          return {...el, bookmark: !item.bookmark}
+        }
+        return el
+      })
+
+      setDataList(changeDataList);
+
+      const sameBookmarkItem = bookmarkList.find(el => el.id === item.id)
+
+      if(sameBookmarkItem === undefined || bookmarkList.length === 0){  
+        const newItem = {
+          ...item,
+          bookmark: true
+        }
+        setBookmarkAndStorage([...bookmarkList, newItem]);
+      }else{
+        const changeBookmarkList = bookmarkList.map((el)=>{
+          if(el.id === item.id){
+            return {...el, bookmark: false}
+          }
+          return el
+        })
+        setBookmarkAndStorage(changeBookmarkList);
+      }
+  }
 
   return (
     <Container>
       <h2>상품 리스트</h2>
-        <ItemList renderList={dataList} 
-                  dataList={dataList} 
-                  setDataList={setDataList} 
-                  setBookmarkAndStorage={setBookmarkAndStorage}/>
+        <ItemList renderList={dataList} toggleBookMark={toggleBookMark}/>
       <h2>북마크 리스트</h2>
-        <ItemList renderList={bookmarkList} 
-                  dataList={dataList} 
-                  setDataList={setDataList} 
-                  setBookmarkAndStorage={setBookmarkAndStorage}/>
+        <ItemList renderList={bookmarkList.slice(0,4)} toggleBookMark={toggleBookMark}/>
     </Container>
   );
 }
