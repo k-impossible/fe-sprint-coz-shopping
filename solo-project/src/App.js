@@ -2,10 +2,10 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Main from "./pages/Main";
-import BookMarkList from "./pages/BookMarkList";
-import ProductList from "./pages/ProductList";
+import BookMarkPage from "./pages/BookMarkPage";
+import ProductPage from "./pages/ProductPage";
 import Footer from "./components/Footer";
-import GlobalStyle from "./GlobalStyle";
+import {GlobalStyle} from "./GlobalStyle";
 import styled from "styled-components";
 
 const Wrap = styled.div`
@@ -22,8 +22,8 @@ function App() {
       <Wrap>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/productList" element={<ProductList />} />
-          <Route path="/bookmarkList" element={<BookMarkList />} />
+          <Route path="/productPage" element={<BookMarkPage />} />
+          <Route path="/bookmarkPage" element={<ProductPage />} />
         </Routes>
       </Wrap>
       <Footer />
